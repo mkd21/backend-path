@@ -1,0 +1,88 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sw?
+
+# Optional npm cache
+.npm/
+
+# Coverage directory used by testing tools like jest
+coverage/
+
+# Output of 'npm pack'
+*.tgz
+
+# Build outputs
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional error reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Next.js cache
+.next/
+
+# SvelteKit
+.svelte-kit/
+
+# Parcel
+.cache/
+
+# Binaries
+*.exe
+*.out
+*.app
+
+# Local debug folder
+.debug/
+
+# PM2 logs
+pids
+*.pid
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# Mac files
+.AppleDouble
+.LSOverride
+
+# Yarn Integrity
+.yarn-integrity
+
+# ESLint cache
+.eslintcache
