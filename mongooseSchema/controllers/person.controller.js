@@ -29,8 +29,7 @@ const addUser = asyncHandler( async (req , res) =>{
 
 });
 
-// get user data 
-
+// get all user data 
 const showUser = asyncHandler( async (_ , res) =>{
 
     const people = await Person.find();
@@ -41,6 +40,19 @@ const showUser = asyncHandler( async (_ , res) =>{
 
 })
 
+// get user wrt work type eg : manager , chef , waiter
 
+const showUserAccordingToWorkType = asyncHandler( async(req , res) =>{
 
-export {addUser , showUser };
+    const workType = req.params.workType;    // will extract the workType from the url
+    console.log(workType);
+
+    if(workType != "chef" && workType != "waiter" && workType != "manager") throw new ApiError(400 , "invalid request");
+
+    const desiredUserDetails = await Person.find({work : workType});
+
+    return res.status(200).json({message : "success" , data : desiredUserDetails});
+
+});
+
+export {addUser , showUser , showUserAccordingToWorkType };

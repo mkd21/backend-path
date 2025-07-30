@@ -1,12 +1,15 @@
 
 import { Router } from "express";
-import { addUser , showUser } from "../controllers/person.controller.js";
+import { addUser , showUser , showUserAccordingToWorkType } from "../controllers/person.controller.js";
 
 
-const router = Router();
+const userRoute = Router();
 
-router.route("/add-user").post(addUser);
+userRoute.route("/add-user").post(addUser);
 
-router.route("/get-user").get(showUser)
+userRoute.route("/get-user").get(showUser)
 
-export default router;
+userRoute.route("/:workType").get(showUserAccordingToWorkType);
+
+
+export default userRoute;
