@@ -8,7 +8,7 @@ app.use(express.json());
 
 
 
-// user routes ex chef , manager , waiter etc...
+// user routes 
 import router from "./routes/person.route.js";
 
 app.use("/api/user" , router);

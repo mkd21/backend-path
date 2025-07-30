@@ -36,11 +36,11 @@ const showUser = asyncHandler( async (_ , res) =>{
 
     if(people.length == 0) throw new ApiError(404 , "no data found");
 
-    return res.status(200).json({message : "success" , data : peoples});
+    return res.status(200).json({message : "success" , data : people});
 
 })
 
-// get user wrt work type eg : manager , chef , waiter
+// find user w.r.t work type eg : manager , chef , waiter
 
 const showUserAccordingToWorkType = asyncHandler( async(req , res) =>{
 
@@ -55,4 +55,36 @@ const showUserAccordingToWorkType = asyncHandler( async(req , res) =>{
 
 });
 
-export {addUser , showUser , showUserAccordingToWorkType };
+// update user 
+const updateUser = asyncHandler( async(req , res) =>{
+
+    const userId = req.params.id;
+    const dataToUpdate = req.body;
+
+    const user = await Person.findByIdAndUpdate(userId , dataToUpdate ,  {
+        new : true, // will return the updated document
+        runValidators : true   // will run the mongoose validation
+    });
+
+
+    if(!user) throw new ApiError(404 , "User not found");
+
+    return res.status(200).json({message : "success" , data : user});
+
+});
+
+
+// delete user 
+
+const deleteUser = asyncHandler( async(req , res) =>{
+
+    const userID = req.params.id;
+    const deletedUser = await Person.findByIdAndDelete(userID);
+
+    if(!deletedUser) throw new ApiError(404 , "user not found");
+
+    return res.status(200).json({message : "success"});
+});
+
+
+export {addUser , showUser , showUserAccordingToWorkType , updateUser , deleteUser };
