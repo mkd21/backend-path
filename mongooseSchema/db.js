@@ -9,7 +9,7 @@ const connectDB = () => {
         console.log("db connected");
     });
 
-    return mongoose.connect(mongoURL, { serverSelectionTimeoutMS: 5000 });   // mongoose obejct itself returns a promise so no need to write async function
+    return mongoose.connect(mongoURL, { serverSelectionTimeoutMS: 5000 });   // mongoose object itself returns a promise so no need to write async function
 }
 
 export default connectDB;
