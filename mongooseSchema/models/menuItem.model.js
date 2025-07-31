@@ -14,7 +14,7 @@ const menuSchema = Schema({
     },
     taste : {
         type : String,
-        enum : ["sweet" , "spicy" , "sour"],
+        enum : ["sweet" , "spicy" , "sour" , "neutral"],
         required : true
     },
     is_drink : {
