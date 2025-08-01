@@ -22,7 +22,6 @@ menuRouter.route("/:id").put(updateMenuItems);
 
 
 // delete menu item 
-
 menuRouter.route("/:id").delete(deleteMenuItems);
 
 export default menuRouter;

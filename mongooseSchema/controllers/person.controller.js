@@ -25,7 +25,7 @@ const addUser = asyncHandler( async (req , res) =>{
         salary
     });
 
-    return res.status(201).json({success : "User created"});
+    return res.status(201).json({success : "User created" , data : user});
 
 });
 
