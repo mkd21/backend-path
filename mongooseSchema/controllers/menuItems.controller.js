@@ -35,7 +35,7 @@ const menuItemsAccordingToTaste = asyncHandler( async(req , res) =>{
 
     const taste = req.params.taste;
 
-    if(taste != "sweet" && taste != "sour" && taste != "spicy") throw new ApiError(404 , "no food of that specific taste is available");
+    if(taste != "sweet" && taste != "sour" && taste != "spicy" && taste != "neutral") throw new ApiError(404 , "no food of that specific taste is available");
 
     const foodItems = await MenuItem.find({taste});
 
