@@ -9,9 +9,9 @@ app.use(express.json());
 
 
 // user routes 
-import router from "./routes/person.route.js";
+import userRoute from "./routes/person.route.js";
 
-app.use("/api/user" , router);
+app.use("/api/user" , userRoute);
 
 
 // menu routes 
