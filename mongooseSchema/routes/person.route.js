@@ -2,7 +2,6 @@
 import { Router } from "express";
 import { addUser , showUser , showUserAccordingToWorkType , updateUser , deleteUser } from "../controllers/person.controller.js";
 
-
 const userRoute = Router();
 
 // add users 

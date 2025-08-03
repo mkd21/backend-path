@@ -12,6 +12,7 @@ passport.use(new LocalStrategy( {
 }, 
 async(userName , password , done) =>{
 
+    console.log(userName , password);
     try 
     {
         const user = await Person.findOne({userName});
@@ -20,11 +21,15 @@ async(userName , password , done) =>{
             return done(null , false , {message : "No user Found"});
         }
 
-        const isPasswordMatch = user.password === password ? true : false;
+        const isPasswordMatch = await user.isPasswordCorrect(password);
 
         if(isPasswordMatch){
             return done(null , user);
         }
+
+        console.log("password match? :",isPasswordMatch);
+        return done(null , false , {message : "password dont match"});
+        
     }
     catch(err)
     {

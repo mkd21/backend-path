@@ -12,10 +12,9 @@ import passport from "passport";
 app.use(passport.initialize());
 
 
-
 import "./passport-local-strategy.js";
 
-app.post("/" , passport.authenticate("local" , {session : false}), (req , res) =>{
+app.post("/" , passport.authenticate("local" , {session : false}) ,  (req , res) =>{
     res.send("Welcome to Hotel");
 })
 
