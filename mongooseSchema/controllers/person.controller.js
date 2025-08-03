@@ -7,11 +7,11 @@ import ApiError from "../utils/ApiError.js";
 
 const addUser = asyncHandler( async (req , res) =>{
 
-    const {name , age , work , email , address , salary } = req.body;
+    const {name , age , work , email , address , salary , userName , password } = req.body;
    
     // check if mandatory data is present or not 
 
-    if([name , age , work , email , address , salary].some( fields => !fields  ))
+    if([name , age , work , email , address , salary , userName , password].some( fields => !fields  ))
     {
         throw new ApiError(400 , "All fields are required");
     }
@@ -22,7 +22,9 @@ const addUser = asyncHandler( async (req , res) =>{
         work,
         email,
         address,
-        salary
+        salary,
+        userName,
+        password
     });
 
     return res.status(201).json({success : "User created" , data : user});
