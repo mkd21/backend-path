@@ -17,7 +17,7 @@ voting app functionality :
 5. user data must contain their unique government id proof named : aadhar card number
 6. there should be one admin who will maintain all the candidate list and make sure that he can't cast his vote 
 7. users can change their password
-8. users can login uisng aadhar number and password 
+8. users can login using aadhar number and password 
 
 --------------------x------------------------
 
