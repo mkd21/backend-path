@@ -32,6 +32,36 @@ const signUp = asyncWrapper( async (req , res) =>{
 
 const login = asyncWrapper (async (req , res) =>{
     
+    const {aadharCardNumber , password} = req.body;
+
+    if(!aadharCardNumber || !password) throw new ApiError( 400 , "aadharcard and password is required");
+
+    // will check if user is present or not 
+    const user = await User.findOne({aadharCardNumber}).select("+password");
+    
+    // if user dont exist 
+    if(!user) throw new ApiError(404 , "user not found");
+
+    // checking if password is correct or not 
+    if( ! await user.isPasswordCorrect(password)) throw new ApiError(401 , "password is incorrect");
+
+
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({validateBeforeSave : false});   // this step will tell mongooose to skip validation of all required fields
+
+    const userData = user.toObject();
+    delete userData.password;
+    delete userData.refreshToken;
+
+    return res.status(200)
+    .cookie( "refreshToken" , refreshToken, 
+        {httpOnly : true , secure : process.env.NODE_ENV == "production" , sameSite: "none"} )
+    .json({message : "user logged-in" , userData , accessToken});
+
+
 });
 
 export {signUp , login }
