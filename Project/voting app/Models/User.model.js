@@ -41,6 +41,9 @@ const userSchema = mongoose.Schema(
         isVoted : {
             type : Boolean,
             default : false
+        },
+        refreshToken : {
+            type : String
         }
     } , 
     {timestamps : true}

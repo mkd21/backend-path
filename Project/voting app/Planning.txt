@@ -41,7 +41,7 @@ Vote Counts:
 
 User Profile:
 
-/profile : GET - Get the users profile infirmation
+/profile : GET - Get the users profile information
 /profile/password - PUT - change the user's password
 
 

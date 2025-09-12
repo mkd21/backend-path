@@ -16,7 +16,7 @@ import "./passport-local-strategy.js";
 
 app.post("/" , passport.authenticate("local" , {session : false}) ,  (req , res) =>{
     res.send("Welcome to Hotel");
-})
+});
 
 // middleware to track the logs 
 

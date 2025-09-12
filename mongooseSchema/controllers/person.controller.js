@@ -8,9 +8,9 @@ import ApiError from "../utils/ApiError.js";
 const addUser = asyncHandler( async (req , res) =>{
 
     const {name , age , work , email , address , salary , userName , password } = req.body;
-   
-    // check if mandatory data is present or not 
+    // console.log(name , age , work , email , address , salary , userName , password);
 
+    // check if mandatory data is present or not 
     if([name , age , work , email , address , salary , userName , password].some( fields => !fields  ))
     {
         throw new ApiError(400 , "All fields are required");
@@ -27,8 +27,36 @@ const addUser = asyncHandler( async (req , res) =>{
         password
     });
 
-    return res.status(201).json({success : "User created" , data : user});
+    const generatedToken = user.generateToken();
+    console.log(generatedToken);
 
+    return res.status(201).json({success : "User created" , data : user , token : generatedToken});
+
+});
+
+// login user 
+const loginUser = asyncHandler(async(req , res) =>{
+
+    const {userName , password} = req.body;
+
+    if(!userName || !password) throw new ApiError(500 , "email and password both are required");
+
+    const user = await Person.findOne({userName});
+
+    if(!user) throw new ApiError(400 , "user don't exist");
+
+    const isPasswordValid = await user.isPasswordCorrect(password);
+    if(!isPasswordValid) throw new ApiError(400 , "username or password don't match");
+
+    const token = user.generateToken();
+
+    return res.status(200).json({message : "success" , response : user , token })
+});
+
+// show user profile 
+const showProfile = asyncHandler( async(req , res) =>{
+
+    return res.status(200).json({message : "success" , user : req.desiredUser});
 });
 
 // get all user data 
@@ -41,6 +69,7 @@ const showUser = asyncHandler( async (_ , res) =>{
     return res.status(200).json({message : "success" , data : people});
 
 })
+
 
 // find user w.r.t work type eg : manager , chef , waiter
 
@@ -89,4 +118,4 @@ const deleteUser = asyncHandler( async(req , res) =>{
 });
 
 
-export {addUser , showUser , showUserAccordingToWorkType , updateUser , deleteUser };
+export {addUser , loginUser , showProfile , showUser , showUserAccordingToWorkType , updateUser , deleteUser };

@@ -27,7 +27,7 @@ const signUp = asyncWrapper( async (req , res) =>{
 
     if(!createdUser) throw new ApiError(500 , "internal server error");
 
-    return res.status(201).json({ message : "created" , userdata : user});
+    return res.status(201).json({ message : "created"});
 });
 
 const login = asyncWrapper (async (req , res) =>{
@@ -57,11 +57,17 @@ const login = asyncWrapper (async (req , res) =>{
     delete userData.refreshToken;
 
     return res.status(200)
-    .cookie( "refreshToken" , refreshToken, 
-        {httpOnly : true , secure : process.env.NODE_ENV == "production" , sameSite: "none"} )
+    .cookie( "refreshToken" , refreshToken, {httpOnly : true , secure : process.env.NODE_ENV == "production" , sameSite: "none"} )
     .json({message : "user logged-in" , userData , accessToken});
-
 
 });
 
-export {signUp , login }
+const profile = asyncWrapper( async(req , res) =>{
+
+    const data = req.specificUser;
+
+    return res.status(200).json({message : "profile accessed" , data });
+
+});
+
+export {signUp , login , profile}

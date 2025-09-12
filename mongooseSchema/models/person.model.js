@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 import bcrypt from "bcrypt";
 
+import jwt from "jsonwebtoken";
+
 const personSchema = mongoose.Schema({
 
     name : {
@@ -51,7 +53,7 @@ personSchema.pre("save" , async function(next){
         const salt = await bcrypt.genSalt(10);
         
         // hash password 
-        const hashedPassword = await bcrypt.hash(this.password, salt);
+        const hashedPassword = bcrypt.hash(this.password, salt);
         this.password = hashedPassword;
         next();
     }
@@ -64,6 +66,11 @@ personSchema.pre("save" , async function(next){
 personSchema.methods.isPasswordCorrect = async function(password)
 {
     return await bcrypt.compare(password, this.password);
+}
+
+personSchema.methods.generateToken = function()
+{
+    return jwt.sign({id : this._id , userName : this.userName} , process.env.SECRET_KEY);
 }
 
 export const Person = mongoose.model("Person" , personSchema);
