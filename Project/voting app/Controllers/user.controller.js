@@ -70,4 +70,11 @@ const profile = asyncWrapper( async(req , res) =>{
 
 });
 
-export {signUp , login , profile}
+const changePassword = asyncWrapper( async (req , res) =>{
+
+    const {oldPassword , newPassword} = req.body;
+    console.log(oldPassword , newPassword);
+
+});
+
+export {signUp , login , profile , changePassword}
