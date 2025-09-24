@@ -104,7 +104,9 @@ const changePassword = asyncWrapper(async (req, res) => {
 
     if(!checkIfPasswordCorrectOrNot) throw new ApiError(401, "please check the provided password");
 
-    req.specificUser.password = newPassword;
+    req.specificUser.password = newPassword;  // password hashing will be done because of pre hook
+
+    await req.specificUser.save();
 
     res.status(200).json({message : "password updated successfully"});
   } 
