@@ -25,7 +25,7 @@ const authMiddleware = async (req, res, next) => {
 
     const verifiedUser = jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET_KEY);
 
-    const user = await User.findById(verifiedUser.id).select("-refreshToken")
+    const user = await User.findById(verifiedUser.id).select("-refreshToken");
 
     req.specificUser = user;
     next();
