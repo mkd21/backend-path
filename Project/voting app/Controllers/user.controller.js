@@ -16,11 +16,8 @@ const signUp = asyncWrapper(async (req, res) => {
     isVoted,
   } = req.body;
 
-  if (
-    [name, age, email, mobile, address, aadharCardNumber, password].some(
-      (iter) => !iter
-    )
-  ) {
+  if ([name, age, email, mobile, address, aadharCardNumber, password].some((iter) => !iter)) 
+  {
     throw new ApiError(400, "all fields are required");
   }
 
