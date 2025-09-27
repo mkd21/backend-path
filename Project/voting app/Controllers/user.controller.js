@@ -111,7 +111,8 @@ const changePassword = asyncWrapper(async (req, res) => {
     res.status(200).json({message : "password updated successfully"});
   } 
 
-  catch (error) {
+  catch (error) 
+  {
     throw new ApiError(500 , "some internal error");
   }
 
