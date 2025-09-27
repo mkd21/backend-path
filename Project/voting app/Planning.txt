@@ -45,7 +45,9 @@ User Profile:
 /profile/password - PUT - change the user's password
 
 
-Admin Candidate Management:
+Admin 
+
+Candidate Management:   can only be done by ADMIN 
 
 /createCandidates: POST - Create a new Candidate
 /candidates/:candidateId: PUT - update the existing candidate 
